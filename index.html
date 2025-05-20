@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@MissMita_Bot - Telegram Group Manager</title>
+    <meta name="description" content="Powerful Telegram group management bot with spam protection, welcome messages, custom commands and more">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Command Section Styles */
+        .commands-section {
+            background: #f9f9f9;
+            padding: 80px 0;
+        }
+        
+        .command-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .tab-btn {
+            background: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tab-btn:hover, .tab-btn.active {
+            background: #0088cc;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .command-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .command-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .command-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .command-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .cmd-name {
+            color: #0088cc;
+            font-weight: bold;
+            font-family: monospace;
+        }
+        
+        .cmd-syntax {
+            color: #666;
+            font-size: 0.9em;
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        .cmd-desc {
+            color: #555;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Search Box */
+        .command-search {
+            margin: 20px auto;
+            max-width: 500px;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .search-box:focus {
+            border-color: #0088cc;
+            box-shadow: 0 0 0 3px rgba(0, 136, 204, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">Mita</a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#commands">Commands</a>
+                <a href="#guide">How To Use</a>
+                <a href="#support">Support</a>
+                <a href="https://t.me/MissMita_Bot?startgroup=true" class="btn primary">Add to Group</a>
+            </div>
+            <button class="hamburger">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <a href="#features"><i class="fas fa-shield-alt"></i> Features</a>
+            <a href="#commands"><i class="fas fa-code"></i> Commands</a>
+            <a href="#guide"><i class="fas fa-book"></i> How To Use</a>
+            <a href="#support"><i class="fas fa-headset"></i> Support</a>
+            <a href="https://t.me/MissMita_Bot?startgroup=true" class="btn primary mobile-btn"><i class="fas fa-robot"></i> Add to Group</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Powerful Group Management for Telegram</h1>
+                <p>@MissMita_Bot helps you manage your Telegram groups with advanced spam protection, welcome messages, custom commands and more.</p>
+                <div class="hero-buttons">
+                    <a href="https://t.me/MissMita_Bot?startgroup=true" class="btn primary">Add to Group</a>
+                    <a href="#commands" class="btn secondary">View Commands</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/bot-preview.png" alt="@MissMita_Bot preview" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Powerful Features</h2>
+            <p class="section-subtitle">Everything you need to manage your Telegram community</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="images/feature-spam.png" alt="Spam protection" loading="lazy">
+                    </div>
+                    <h3>Spam Protection</h3>
+                    <p>Automatically detects and removes spam, flood, and troll messages to keep your group clean.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="images/feature-welcome.png" alt="Welcome messages" loading="lazy">
+                    </div>
+                    <h3>Welcome Messages</h3>
+                    <p>Greet new members with customizable welcome messages and rules.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="images/feature-commands.png" alt="Custom commands" loading="lazy">
+                    </div>
+                    <h3>Custom Commands</h3>
+                    <p>Create your own commands to provide quick answers to common questions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="images/feature-language.png" alt="Multilingual" loading="lazy">
+                    </div>
+                    <h3>Multilingual</h3>
+                    <p>Supports multiple languages to serve international communities.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="images/feature-reliable.png" alt="High reliability" loading="lazy">
+                    </div>
+                    <h3>High Reliability</h3>
+                    <p>99.9% uptime ensures your group is always protected.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Admin Tools</h3>
+                    <p>Powerful tools for moderators to manage members and content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Guide Section -->
+    <section id="guide" class="guide">
+        <div class="container">
+            <h2>How To Use @MissMita_Bot</h2>
+            <p class="section-subtitle">Get started in just a few simple steps</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Add to Your Group</h3>
+                        <p>Click the "Add to Group" button or manually add @MissMita_Bot to your Telegram group.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Promote to Admin</h3>
+                        <p>Give @MissMita_Bot admin privileges with permissions to delete messages and ban users.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Configure Settings</h3>
+                        <p>Use commands like /settings to customize the bot's behavior for your group.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Enjoy Protection</h3>
+                        <p>The bot will now automatically protect your group from spam and unwanted activity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commands Section -->
+    <section id="commands" class="commands-section">
+        <div class="container">
+            <h2>Complete Command List</h2>
+            <p class="section-subtitle">All available commands for @MissMita_Bot</p>
+            
+            <!-- Search Box -->
+            <div class="command-search">
+                <input type="text" class="search-box" placeholder="Search commands..." id="commandSearch">
+            </div>
+            
+            <!-- Command Categories Tabs -->
+            <div class="command-tabs">
+                <button class="tab-btn active" onclick="openTab(event, 'admin')">
+                    <i class="fas fa-user-shield"></i> Admin
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'moderation')">
+                    <i class="fas fa-gavel"></i> Moderation
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'anime')">
+                    <i class="fas fa-dragon"></i> Anime
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'music')">
+                    <i class="fas fa-music"></i> Music
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'fun')">
+                    <i class="fas fa-gamepad"></i> Fun
+                </button>
+                <button class="tab-btn" onclick="openTab(event, 'utility')">
+                    <i class="fas fa-tools"></i> Utility
+                </button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div id="admin" class="tab-content" style="display: block;">
+                <div class="command-grid">
+                    <!-- Admin Commands -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/ban</span>
+                            <span class="cmd-syntax">[user] [reason]</span>
+                        </div>
+                        <p class="cmd-desc">Ban a user from the group (Admins only)</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/mute</span>
+                            <span class="cmd-syntax">[user] [time]</span>
+                        </div>
+                        <p class="cmd-desc">Restrict a user from sending messages</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/warn</span>
+                            <span class="cmd-syntax">[user] [reason]</span>
+                        </div>
+                        <p class="cmd-desc">Issue a warning to a user</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/purge</span>
+                            <span class="cmd-syntax">[count]</span>
+                        </div>
+                        <p class="cmd-desc">Delete multiple messages at once</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/promote</span>
+                            <span class="cmd-syntax">[user]</span>
+                        </div>
+                        <p class="cmd-desc">Make a user admin</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/demote</span>
+                            <span class="cmd-syntax">[user]</span>
+                        </div>
+                        <p class="cmd-desc">Remove admin privileges</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="moderation" class="tab-content">
+                <div class="command-grid">
+                    <!-- Moderation Commands -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/antispam</span>
+                            <span class="cmd-syntax">[on/off]</span>
+                        </div>
+                        <p class="cmd-desc">Toggle spam protection</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/antinsfw</span>
+                            <span class="cmd-syntax">[on/off]</span>
+                        </div>
+                        <p class="cmd-desc">Toggle NSFW content filtering</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/flood</span>
+                            <span class="cmd-syntax">[on/off]</span>
+                        </div>
+                        <p class="cmd-desc">Prevent message flooding</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/blacklist</span>
+                            <span class="cmd-syntax">[add/remove] [word]</span>
+                        </div>
+                        <p class="cmd-desc">Manage banned words in group</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/report</span>
+                            <span class="cmd-syntax">[reply to message]</span>
+                        </div>
+                        <p class="cmd-desc">Report a message to admins</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="anime" class="tab-content">
+                <div class="command-grid">
+                    <!-- Anime Commands -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/anime</span>
+                            <span class="cmd-syntax">[title]</span>
+                        </div>
+                        <p class="cmd-desc">Search for anime information</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/manga</span>
+                            <span class="cmd-syntax">[title]</span>
+                        </div>
+                        <p class="cmd-desc">Search for manga information</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/character</span>
+                            <span class="cmd-syntax">[name]</span>
+                        </div>
+                        <p class="cmd-desc">Find anime character profiles</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/airing</span>
+                            <span class="cmd-syntax">[anime]</span>
+                        </div>
+                        <p class="cmd-desc">Check anime airing schedule</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/animequotes</span>
+                        </div>
+                        <p class="cmd-desc">Get random anime quotes</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="music" class="tab-content">
+                <div class="command-grid">
+                    <!-- Music Commands -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/play</span>
+                            <span class="cmd-syntax">[song]</span>
+                        </div>
+                        <p class="cmd-desc">Stream music in voice chat</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/skip</span>
+                        </div>
+                        <p class="cmd-desc">Skip to next track</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/queue</span>
+                        </div>
+                        <p class="cmd-desc">Show current playlist</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/pause</span>
+                        </div>
+                        <p class="cmd-desc">Pause current track</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/resume</span>
+                        </div>
+                        <p class="cmd-desc">Resume paused track</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="fun" class="tab-content">
+                <div class="command-grid">
+                    <!-- Fun Commands -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/cosplay</span>
+                        </div>
+                        <p class="cmd-desc">Get random cosplay images</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/memes</span>
+                        <!--    <span class="cmd-syntax">[user1] [user2]</span>-->
+                        </div>
+                        <p class="cmd-desc">Retrieves a random meme from various meme subreddits</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/quote</span>
+                        </div>
+                        <p class="cmd-desc">Get random anime quotes</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/dice</span>
+                        </div>
+                        <p class="cmd-desc">Roll a dice</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/cursed</span>
+                        </div>
+                        <p class="cmd-desc">Retrieves a random meme from the cursedcomments subreddit</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="utility" class="tab-content">
+                <div class="command-grid">
+                    <!-- Utility Commands -->
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/font</span>
+                            <span class="cmd-syntax">[text]</span>
+                        </div>
+                        <p class="cmd-desc">Convert text to stylish fonts</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/ud</span>
+                            <span class="cmd-syntax">[term]</span>
+                        </div>
+                        <p class="cmd-desc">Urban Dictionary definitions</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/webss</span>
+                            <span class="cmd-syntax">[url]</span>
+                        </div>
+                        <p class="cmd-desc">Capture website screenshots</p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/tgm</span>
+                           <!-- <span class="cmd-syntax">[question</span>-->
+                        </div>
+                        <p class="cmd-desc">Convert photo to telegraph </p>
+                    </div>
+                    
+                    <div class="command-card">
+                        <div class="command-header">
+                            <span class="cmd-name">/echo</span>
+                        </div>
+                        <p class="cmd-desc">Echos the message</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Privacy & Terms Section -->
+<section id="legal" class="legal-section">
+    <div class="container">
+        <!-- Privacy Policy -->
+        <div class="legal-card">
+            <h2>Privacy Policy</h2>
+            <div class="legal-content">
+                <p><strong>Last Updated:</strong> May 7, 2025</p>
+                
+                <h3>1. Information We Collect</h3>
+                <p>@MissMita_Bot may collect and store:</p>
+                <ul>
+                    <li>Basic group information (ID, title, member count)</li>
+                    <li>User IDs of group administrators</li>
+                    <li>Message content for spam detection (not stored permanently)</li>
+                    <li>Command usage statistics (anonymous)</li>
+                </ul>
+                
+                <h3>2. How We Use Information</h3>
+                <p>We use collected data to:</p>
+                <ul>
+                    <li>Provide and improve our services</li>
+                    <li>Prevent spam and abuse</li>
+                    <li>Generate anonymous usage statistics</li>
+                    <li>Troubleshoot technical issues</li>
+                </ul>
+                
+                <h3>3. Data Protection</h3>
+                <p>We implement:</p>
+                <ul>
+                    <li>Secure server infrastructure</li>
+                    <li>Regular data purging (non-essential data deleted after 30 days)</li>
+                    <li>No selling or sharing of data with third parties</li>
+                </ul>
+                
+                <h3>4. Your Rights</h3>
+                <p>You can request:</p>
+                <ul>
+                    <li>Access to your stored data</li>
+                    <li>Deletion of your data</li>
+                    <li>Opt-out of data collection (limits functionality)</li>
+                </ul>
+                
+                <p>Contact us at <a href="https://t.me/Mita_Support">@Mita_Support</a> for data requests.</p>
+            </div>
+        </div>
+        
+        <!-- Terms of Service -->
+        <div class="legal-card">
+            <h2>Terms of Service</h2>
+            <div class="legal-content">
+                <p><strong>Last Updated:</strong> May 7, 2025</p>
+                
+                <h3>1. Acceptance of Terms</h3>
+                <p>By using @MissMita_Bot, you agree to:</p>
+                <ul>
+                    <li>Comply with Telegram's Terms of Service</li>
+                    <li>Not use the bot for illegal activities</li>
+                    <li>Not attempt to disrupt bot functionality</li>
+                </ul>
+                
+                <h3>2. Bot Usage</h3>
+                <p>You agree to:</p>
+                <ul>
+                    <li>Use the bot only as intended</li>
+                    <li>Not spam commands or abuse API</li>
+                    <li>Not use the bot to harass others</li>
+                </ul>
+                
+                <h3>3. Moderation Rights</h3>
+                <p>We reserve the right to:</p>
+                <ul>
+                    <li>Ban groups violating our policies</li>
+                    <li>Update terms without prior notice</li>
+                    <li>Discontinue service at any time</li>
+                </ul>
+                
+                <h3>4. Limitation of Liability</h3>
+                <p>@MissMita_Bot is not responsible for:</p>
+                <ul>
+                    <li>Service interruptions</li>
+                    <li>Data loss</li>
+                    <li>User-generated content</li>
+                </ul>
+                
+                <h3>5. Changes to Terms</h3>
+                <p>We may update these terms. Continued use constitutes acceptance.</p>
+            </div>
+        </div>
+    </div>
+</section>    
+
+    <!-- Support Section -->
+    <section id="support" class="support">
+        <div class="container">
+            <h2>Need Help?</h2>
+            <p class="section-subtitle">Our support team is ready to assist you</p>
+            
+            <div class="support-content">
+                <div class="support-info">
+                    <h3>Join Our Support Group</h3>
+                    <p>Get help from our community and support team in our Telegram group.</p>
+                    <a href="https://t.me/Mita_Support" class="btn primary">
+                        <i class="fab fa-telegram"></i> Join Support
+                    </a>
+                </div>
+                <div class="support-image">
+                    <img src="images/bot-preview.png" alt="Support preview" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="logo">@MissMita_Bot</a>
+                    <p>Powerful Telegram group management bot</p>
+                    <div class="social-links">
+                        <a href="https://t.me/MissMita_Bot" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#features">Features</a>
+                    <a href="#commands">Commands</a>
+                    <a href="https://t.me/MissMita_Bot?startgroup=true">Add to Group</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="#legal">Terms of Service</a>
+                    <a href="#legal">Privacy Policy</a>
+                    <a href="https://t.me/Mita_Support">Support</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 @MissMita_Bot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        
+        // Tab functionality for commands
+        function openTab(evt, tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].style.display = "none";
+            }
+            
+            // Remove active class from all buttons
+            const tabButtons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Show current tab and mark button as active
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+    </script>    
+</body>
+</html>

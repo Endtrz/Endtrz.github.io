@@ -1,0 +1,30 @@
+{
+  "name": "missmita",
+  "version": "1.0.0",
+  "description": "Official website for @MissMita_Bot - Telegram Group Manager",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "serve -s",
+    "heroku-postbuild": "echo 'No build needed for static site'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "serve": "^14.2.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "group",
+    "manager",
+    "missmita"
+  ],
+  "author": "Hasnain Khan",
+  "license": "MIT"
+}
